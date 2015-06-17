@@ -74,6 +74,10 @@ public class FileViewFragment extends BaseFragment {
 
 	
 	
+	
+	
+	
+	
 	public void notifyAdapterData(List<FileInfoEntity> fileInfoEntities) {
 		adapter.setListDate(fileInfoEntities);
 	}
