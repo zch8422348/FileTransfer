@@ -23,6 +23,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Toast;
 
@@ -116,7 +117,6 @@ public abstract class BaseActivity extends FragmentActivity {
         super.finish();
 //        queue.removeLast();
     }
-
     /** 初始化视图 **/
     protected abstract void initViews();
 

@@ -37,6 +37,7 @@ import com.android.zch.file.FileCategoryHelper.CategoryInfo;
 import com.android.zch.file.FileCategoryHelper.FileCategory;
 import com.android.zch.file.UtilsFile.SDCardInfo;
 import com.android.zch.util.DateUtils;
+import com.android.zch.util.Utils;
 import com.android.zch.wifi.CreateAPProcess;
 import com.android.zch.wifi.IPMSGConst;
 import com.android.zch.wifi.UDPSocketThread;
@@ -56,7 +57,7 @@ import com.android.zch.wifi.WifiapBroadcast.EventHandler;
  */
 
 public class MainActivity extends BaseActivity implements EventHandler {
-	private boolean client = false;// is client?
+	private boolean client = true;// is client?
 	private Context context;
 	private CreateAPProcess createAPProcess;
 	private WifiSearchProcess wifiSearchProcess;
@@ -70,12 +71,9 @@ public class MainActivity extends BaseActivity implements EventHandler {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		// register wifi brocast
-		Log.e(tag, "scanResults==========" + (scanResults == null));
-		initBroadcast();
+		Utils.showActionBarMenu(this);
 		initViews();
 		initEvents();
-		OpenWifiAP();
 		startUDPSocketThread();
 
 	}
@@ -84,16 +82,6 @@ public class MainActivity extends BaseActivity implements EventHandler {
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
-
-		unregisterReceiver(wifiapBroadcast); // 撤销广播
-		wifiapBroadcast.removeehList(this);
-		if (wifiSearchProcess != null)
-			wifiSearchProcess.stop();
-
-		if (createAPProcess != null)
-			createAPProcess.stop();
-		if (scanResults != null)
-			scanResults.clear();
 	}
 
 	@Override
@@ -103,7 +91,6 @@ public class MainActivity extends BaseActivity implements EventHandler {
 		this.context = this;
 		fileFragment = new FileFragment();
 		getFragment(fileFragment);
-		// updateUI();
 
 	}
 
@@ -118,7 +105,6 @@ public class MainActivity extends BaseActivity implements EventHandler {
 	@Override
 	protected void initEvents() {
 		// TODO Auto-generated method stub
-		wifiapBroadcast.addehList(this);
 
 	}
 
@@ -234,15 +220,6 @@ public class MainActivity extends BaseActivity implements EventHandler {
 		}
 	}
 
-	private void updateUI() {
-		boolean sdCardReady = UtilsFile.isSDCardReady();
-		if (sdCardReady) {
-			Log.e(tag, "fileFragment==" + (fileFragment == null));
-			fileFragment.getCategoryInfo();
-			// refresh file list
-		} else {
-		}
-	}
 
 	/** 含有Bundle通过Class跳转界面 **/
 	public void startActivity(Class<?> cls, Bundle bundle) {
@@ -346,6 +323,11 @@ public class MainActivity extends BaseActivity implements EventHandler {
 				break;
 			}
 		}
+	};
+
+	public boolean onCreateOptionsMenu(android.view.Menu menu) {
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
 	};
 
 	@Override

@@ -286,20 +286,15 @@ public class UDPSocketThread implements Runnable {
 
 	public synchronized void sendUDPdata(int commandNo, String targetIP,
 			Object addData) {
-		Log.e(tag, "obj s");
 		// 构造发送协议数据
 		IPMSGProtocol ipmsgProtocol = null;
 		if (addData == null) {
-			Log.e(tag, "obj s1111");
 			ipmsgProtocol = new IPMSGProtocol(IMEI, commandNo);
 		} else if (addData instanceof Entity) {
-			Log.e(tag, "obj s2222");
 			ipmsgProtocol = new IPMSGProtocol(IMEI, commandNo, (Entity) addData);
 		} else if (addData instanceof String) {
-			Log.e(tag, "obj s3333");
 			ipmsgProtocol = new IPMSGProtocol(IMEI, commandNo, (String) addData);
 		}
-		Log.e(tag, "obj s444444");
 		sendUDPdata(ipmsgProtocol, targetIP);
 	}
 
@@ -308,27 +303,16 @@ public class UDPSocketThread implements Runnable {
 		// 构造发送报文
 		InetAddress targetAddr;
 		try {
-			Log.e(tag,
-					"targetIP==" + targetIP + "local=="
-							+ Utils.getLocalIpAdress(context));
 			targetAddr = InetAddress.getByName("192.168.43.1"); // 目的地址
-			Log.e(tag, "targetIP2222==");
 			sendBuffer = ipmsgProtocol.getProtocolJSON().getBytes("gbk");
-			Log.e(tag,
-					"targetIP3333==" + targetIP + "local=="
-							+ Utils.getLocalIpAdress(context));
 			sendDatagramPacket = new DatagramPacket(sendBuffer,
 					sendBuffer.length, targetAddr, IPMSGConst.PORT);
-//			byte[] buffer = { 0x01 };
-//			sendDatagramPacket = new DatagramPacket(buffer, buffer.length,
-//					targetAddr, IPMSGConst.PORT);
-
-			Log.i(tag, "sendDatagramPacket 创建成功");
+			// byte[] buffer = { 0x01 };
+			// sendDatagramPacket = new DatagramPacket(buffer, buffer.length,
+			// targetAddr, IPMSGConst.PORT);
 			UDPSocket.send(sendDatagramPacket);
-			Log.i(tag, "sendUDPdata() 数据发送成功");
 		} catch (Exception e) {
 			e.printStackTrace();
-			Log.e(tag, "sendUDPdata() 发送UDP数据包失败2222");
 		} finally {
 			sendDatagramPacket = null;
 		}

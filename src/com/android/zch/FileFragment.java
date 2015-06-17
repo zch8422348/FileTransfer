@@ -82,7 +82,6 @@ public class FileFragment extends BaseFragment implements OnClickListener {
 
 		initEvents();
 		return rootView;
-		// TODO Auto-generated method stub
 
 	}
 

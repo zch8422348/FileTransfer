@@ -15,7 +15,7 @@
                 android:textColor="#e2e2e2" android:textSize="27px"
                 android:singleLine="true" />
         </LinearLayout>
-    <com.android.zch.DragGridView
+    <GridView
         android:id="@+id/gridview"
         android:layout_marginTop="10dip"
         android:layout_width="fill_parent"

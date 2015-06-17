@@ -1,8 +1,11 @@
 package com.android.zch.util;
 
+import java.lang.reflect.Field;
+
 import android.content.Context;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.view.ViewConfiguration;
 
 /**   
 * @Title: Utils.java 
@@ -26,5 +29,17 @@ public class Utils {
 		return (paramIntip & 0xFF) + "." + ((paramIntip >> 8) & 0xFF) + "."
 				+ ((paramIntip >> 16) & 0xFF) + "."
 				+ ((paramIntip >> 24) & 0xFF);
+	}
+	public static void showActionBarMenu(Context context){
+		try {
+			ViewConfiguration mconfig = ViewConfiguration.get(context);
+			Field menuKeyField = ViewConfiguration.class
+					.getDeclaredField("sHasPermanentMenuKey");
+			if (menuKeyField != null) {
+				menuKeyField.setAccessible(true);
+				menuKeyField.setBoolean(mconfig, false);
+			}
+		} catch (Exception ex) {
+		}
 	}
 }
