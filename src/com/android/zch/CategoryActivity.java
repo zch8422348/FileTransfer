@@ -132,6 +132,7 @@ public class CategoryActivity extends BaseActivity {
 		myTouchListeners.remove(listener);
 	}
 
+	
 	@Override
 	public boolean dispatchTouchEvent(MotionEvent ev) {
 		// TODO Auto-generated method stub
