@@ -10,4 +10,5 @@ package com.android.zch;
 */
 public class Application extends android.app.Application{
 
+	
 }
