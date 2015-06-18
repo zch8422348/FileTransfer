@@ -10,6 +10,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.LinearLayout;
 
 import com.android.zch.R;
@@ -35,6 +37,11 @@ public class CategoryActivity extends BaseActivity {
 	private static final int MSG_SCAN_OK = 0;
 	private FileCategory fc;
 	private static final String tag = "CategoryActivity";
+	private List<MyTouchListener> myTouchListeners = new ArrayList<CategoryActivity.MyTouchListener>();
+
+	public interface MyTouchListener {
+		public void onTouchEvent(MotionEvent event);
+	};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -116,6 +123,23 @@ public class CategoryActivity extends BaseActivity {
 		// super.onBackPressed();
 		finish();
 		// return;
+	}
+
+	public void registerTouchEvent(MyTouchListener listener) {
+		myTouchListeners.add(listener);
+	}
+	public void unregisterTouchEvent(MyTouchListener listener){
+		myTouchListeners.remove(listener);
+	}
+
+	
+	@Override
+	public boolean dispatchTouchEvent(MotionEvent ev) {
+		// TODO Auto-generated method stub
+		for (MyTouchListener myTouchListener : myTouchListeners) {
+			myTouchListener.onTouchEvent(ev);
+		}
+		return super.dispatchTouchEvent(ev);
 	}
 
 	public Handler handler = new Handler() {
