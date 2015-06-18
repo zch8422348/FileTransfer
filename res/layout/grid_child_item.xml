@@ -12,9 +12,9 @@
 
         <com.android.zch.util.MyImageView
             android:id="@+id/child_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scaleType="fitCenter" />
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:scaleType="centerCrop" />
 
         <CheckBox
             android:visibility="gone"
@@ -30,6 +30,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center|bottom"
-        android:textSize="10dip" />
+        android:textSize="12sp" />
 
 </LinearLayout>
