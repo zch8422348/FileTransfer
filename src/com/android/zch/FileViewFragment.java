@@ -30,6 +30,8 @@ import com.android.zch.file.FileCategoryHelper.FileCategory;
 * @date 2015-2-3 上午10:58:24 
 * @version V1.0   
 */
+
+
 public class FileViewFragment extends BaseFragment {
 	private View rootView;
 	private CategoryActivity activity;
@@ -87,29 +89,6 @@ public class FileViewFragment extends BaseFragment {
 		emptyView.setVisibility(View.VISIBLE);
 		gridView.setVisibility(View.GONE);
 	}
-
-	// public void getCategoryAdapter(FileCategory fc) {
-	// switch (fc) {
-	// case Doc:
-	// case Zip:
-	// case Apk:
-	// break;
-	// case Music:
-	// adapter = new DragAdapter(getActivity(), activity.getData(),
-	// gridView, fc);
-	// break;
-	// case Video:
-	// adapter = new DragAdapter(getActivity(), activity.getData(),
-	// gridView);
-	// break;
-	// case Picture:
-	// adapter = new DragAdapter(getActivity(), activity.getData(),
-	// gridView);
-	// break;
-	// default:
-	// break;
-	// }
-	// }
 
 	@Override
 	protected void initEvents() {
