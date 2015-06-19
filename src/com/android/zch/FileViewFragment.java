@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore.Audio;
@@ -19,6 +20,7 @@ import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -34,7 +36,9 @@ import com.android.zch.entities.FileInfoEntity;
 import com.android.zch.file.FileCategoryHelper.FileCategory;
 import com.android.zch.util.Utils;
 
-/**test...
+/**
+ * test...
+ * 
  * @Title: FileViewFragment.java
  * @Package com.android.touchjet
  * @Description: TODO
@@ -42,6 +46,7 @@ import com.android.zch.util.Utils;
  * @date 2015-2-3 上午10:58:24
  * @version V1.0
  */
+@SuppressLint("ResourceAsColor")
 public class FileViewFragment extends BaseFragment implements MyTouchListener,
 		OnItemLongClickListener {
 	private View rootView;
@@ -133,14 +138,15 @@ public class FileViewFragment extends BaseFragment implements MyTouchListener,
 		if (drag)
 			switch (event.getAction()) {
 			case MotionEvent.ACTION_DOWN:
-				lastX = (int) event.getRawX();
-				lastY = (int) event.getRawY();
+				// lastX = (int) event.getRawX();
+				// lastY = (int) event.getRawY();
 
 				left = (int) event.getX() - (drag_img.getWidth() / 2);
 				top = (int) event.getY() - (drag_img.getHeight());
 				right = left + drag_img.getWidth();
 				bottom = top + drag_img.getHeight();
 				drag_img.layout(left, top, right, bottom);
+				drag_img.setImageBitmap(bitmap);
 				drag_img.setVisibility(0);
 				break;
 			/**
@@ -168,11 +174,17 @@ public class FileViewFragment extends BaseFragment implements MyTouchListener,
 				break;
 			}
 	}
+	private void createImage(){
+//		ImageView img=new ImageView(getActivity());
+//		img.setImageBitmap(bitmap);
+//		rootView.add
+	}
 
 	@Override
-	public boolean onItemLongClick(AdapterView<?> arg0, View view, int arg2,
-			long arg3) {
+	public boolean onItemLongClick(AdapterView<?> arg0, View view,
+			int position, long arg3) {
 		// TODO Auto-generated method stub
+		this.position = position;
 		drag = true;
 		viewW = view.getWidth();
 		viewH = view.getHeight();
